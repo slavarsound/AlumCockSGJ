@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "AlumCockSGJGameMode.h"
-#include "AlumCockSGJCharacter.h"
+#include "Characters/AlumCockSGJCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
 AAlumCockSGJGameMode::AAlumCockSGJGameMode()
