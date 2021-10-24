@@ -9,5 +9,7 @@ public class AlumCockSGJ : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
+
+		PublicIncludePaths.AddRange(new string[] { "AlumCockSGJ/Characters", "AlumCockSGJ/Controllers", "AlumCockSGJ/Components" });
 	}
 }
