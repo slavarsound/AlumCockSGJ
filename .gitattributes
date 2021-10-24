@@ -18,7 +18,7 @@
 *.cubemap filter=lfs -diff merge=lfs -text
 *.tif filter=lfs -diff merge=lfs -text
 *.duf filter=lfs -diff merge=lfs -text
-*.uasset filter=lfs -diff merge=lfs -text
-*.umap filter=lfs -diff merge=lfs -text
+*.uasset filter=lfs -diff merge=binary -text
+*.umap filter=lfs -diff merge=binary -text
 *.upk filter=lfs -diff merge=lfs -text
 *.udk filter=lfs -diff merge=lfs -text
