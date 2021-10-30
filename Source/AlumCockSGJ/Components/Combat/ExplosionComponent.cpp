@@ -2,6 +2,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystem.h"
+#include "Perception/AISense_Hearing.h"
 #include "Sound/SoundCue.h"
 
 void UExplosionComponent::Explode(AController* Controller)
@@ -20,6 +21,8 @@ void UExplosionComponent::Explode(AController* Controller)
 	if (IsValid(ExplosionSFX))
 	{
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ExplosionSFX, GetComponentLocation());
+		// TODO tweak params
+		UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetComponentLocation());
 	}
 	
 	if (ExplosionEvent.IsBound())

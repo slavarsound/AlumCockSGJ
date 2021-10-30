@@ -17,7 +17,7 @@ EBTNodeResult::Type UBTTask_ApproachTarget::ExecuteTask(UBehaviorTreeComponent& 
 
 	if (!IsValid(Controller) || !IsValid(Blackboard))
 		return EBTNodeResult::Failed;
-
+	
 	APawn* Pawn = Controller->GetPawn();
 	if (!IsValid(Pawn))
 		return EBTNodeResult::Failed;

@@ -5,11 +5,14 @@
 #include "AI/Components/AIPatrolComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Perception/AIPerceptionComponent.h"
+#include "Perception/AISense_Damage.h"
+#include "Perception/AISense_Hearing.h"
 #include "Perception/AISense_Sight.h"
 
 void AAICharacterController::BeginPlay()
 {
 	Super::BeginPlay();
+	PerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &AAICharacterController::OnTargetPerceptionUpdated);
 }
 
 void AAICharacterController::SetPawn(APawn* InPawn)
@@ -32,13 +35,26 @@ void AAICharacterController::ActorsPerceptionUpdated(const TArray<AActor*>& Upda
 {
 	Super::ActorsPerceptionUpdated(UpdatedActors);
 
-	for (const auto PerceptedActor : UpdatedActors)
-	{
-		FActorPerceptionBlueprintInfo ActorPerceptionInfo;
-		bool bHasInfo = PerceptionComponent->GetActorsPerception(PerceptedActor, ActorPerceptionInfo);
-		if (!bHasInfo)
-			continue;
-	}
+	// for (const auto PerceptedActor : UpdatedActors)
+	// {
+	// 	FActorPerceptionBlueprintInfo ActorPerceptionInfo;
+	// 	bool bHasInfo = PerceptionComponent->GetActorsPerception(PerceptedActor, ActorPerceptionInfo);
+	// 	if (!bHasInfo)
+	// 		continue;
+	//
+	// 	for(const auto& Stimulus: ActorPerceptionInfo.LastSensedStimuli)
+	// 	{
+	// 		TSubclassOf<UAISense> StimulusClass = UAIPerceptionSystem::GetSenseClassForStimulus(GetWorld(), Stimulus);
+	// 		if (StimulusClass == UAISense_Sight::StaticClass())
+	// 		{
+	// 			if (Stimulus.IsActive())
+	// 			{
+	// 				
+	// 			}
+	// 			// Blackboard->SetValueAsObject()
+	// 		}
+	// 	}
+	// }
 }
 
 void AAICharacterController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)
@@ -51,13 +67,13 @@ void AAICharacterController::TryMoveToNextTarget()
 	AActor* ActorToFollow = GetClosestSensedActor(UAISense_Sight::StaticClass());
 	if (IsValid(ActorToFollow) && IsValid(Blackboard) && ControlledCharacter->GetAIPatrolComponent()->IsAggressive())
 	{
-		Blackboard->SetValueAsObject(BB_CurrentTarget, ActorToFollow);
+		Blackboard->SetValueAsObject(BB_CurrentVisualTarget, ActorToFollow);
 		SetFocus(ActorToFollow, EAIFocusPriority::Gameplay);
 		bPatrolling = false;
 	}
 	else
 	{
-		Blackboard->SetValueAsObject(BB_CurrentTarget, nullptr);
+		Blackboard->SetValueAsObject(BB_CurrentVisualTarget, nullptr);
 		ClearFocus(EAIFocusPriority::Gameplay);
 		TryPatrol();
 	}	
@@ -79,7 +95,7 @@ void AAICharacterController::TryPatrol()
 			bPatrolling = true;
 		}
 
-		Blackboard->SetValueAsObject(BB_CurrentTarget, nullptr);
+		Blackboard->SetValueAsObject(BB_CurrentVisualTarget, nullptr);
 		Blackboard->SetValueAsVector(BB_NextLocation, NextWaypoint);
 	}
 }
@@ -87,4 +103,49 @@ void AAICharacterController::TryPatrol()
 bool AAICharacterController::IsTargetReached(FVector TargetLocation, float TargetReachRadius) const
 {
 	return (TargetLocation - ControlledCharacter->GetActorLocation()).SizeSquared() <= (TargetReachRadius * TargetReachRadius);
+}
+
+void AAICharacterController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
+{
+	TSubclassOf<UAISense> StimulusClass = UAIPerceptionSystem::GetSenseClassForStimulus(GetWorld(), Stimulus);
+	if (StimulusClass == UAISense_Damage::StaticClass())
+	{
+		AActor* MostThreatfulActor = Cast<AActor>(Blackboard->GetValueAsObject(BB_MostDangerousTarget));
+		float MostThreatfulActorDamage = Blackboard->GetValueAsFloat(BB_MostDangerousTargetDamage);
+		if (Stimulus.IsExpired())
+		{
+			Blackboard->SetValueAsObject(BB_MostDangerousTarget, nullptr);
+			ClearFocus(EAIFocusPriority::Gameplay);
+			Blackboard->SetValueAsFloat(BB_MostDangerousTargetDamage, 0); // perhaps redundant
+			if (IsValid(Actor))
+			{
+				Blackboard->SetValueAsVector(BB_InterestingLocation, Actor->GetActorLocation());
+			}
+		}
+		else if (!IsValid(MostThreatfulActor) || MostThreatfulActorDamage < Stimulus.Strength)
+		{
+			Blackboard->SetValueAsObject(BB_MostDangerousTarget, Actor);
+			Blackboard->SetValueAsFloat(BB_MostDangerousTargetDamage, Stimulus.Strength);
+		}
+	}
+	else if (StimulusClass == UAISense_Sight::StaticClass())
+	{
+		if (Stimulus.WasSuccessfullySensed())
+		{
+			Blackboard->SetValueAsObject(BB_CurrentVisualTarget, Actor);
+		}
+		else
+		{
+			Blackboard->SetValueAsObject(BB_CurrentVisualTarget, nullptr);
+			ClearFocus(EAIFocusPriority::Gameplay);
+			Blackboard->SetValueAsVector(BB_CurrentTargetLastLocation, Actor->GetActorLocation());
+		}
+	}
+	else if (StimulusClass == UAISense_Hearing::StaticClass())
+	{
+		if (Stimulus.WasSuccessfullySensed())
+		{
+			Blackboard->SetValueAsVector(BB_InterestingLocation, Stimulus.StimulusLocation);
+		}
+	}
 }
