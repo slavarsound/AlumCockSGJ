@@ -147,7 +147,7 @@ void UBarrelComponent::FinalizeShot() const
 	}
 
 	// TODO tweak params
-	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetComponentLocation());
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetComponentLocation(), ShotLoudness, GetDamagingActor());
 }
 
 #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG

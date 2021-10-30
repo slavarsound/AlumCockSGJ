@@ -67,13 +67,13 @@ void AAICharacterController::TryMoveToNextTarget()
 	AActor* ActorToFollow = GetClosestSensedActor(UAISense_Sight::StaticClass());
 	if (IsValid(ActorToFollow) && IsValid(Blackboard) && ControlledCharacter->GetAIPatrolComponent()->IsAggressive())
 	{
-		Blackboard->SetValueAsObject(BB_CurrentTarget, ActorToFollow);
+		Blackboard->SetValueAsObject(BB_CurrentVisualTarget, ActorToFollow);
 		SetFocus(ActorToFollow, EAIFocusPriority::Gameplay);
 		bPatrolling = false;
 	}
 	else
 	{
-		Blackboard->SetValueAsObject(BB_CurrentTarget, nullptr);
+		Blackboard->SetValueAsObject(BB_CurrentVisualTarget, nullptr);
 		ClearFocus(EAIFocusPriority::Gameplay);
 		TryPatrol();
 	}	
@@ -95,7 +95,7 @@ void AAICharacterController::TryPatrol()
 			bPatrolling = true;
 		}
 
-		Blackboard->SetValueAsObject(BB_CurrentTarget, nullptr);
+		Blackboard->SetValueAsObject(BB_CurrentVisualTarget, nullptr);
 		Blackboard->SetValueAsVector(BB_NextLocation, NextWaypoint);
 	}
 }
@@ -115,6 +115,7 @@ void AAICharacterController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulu
 		if (Stimulus.IsExpired())
 		{
 			Blackboard->SetValueAsObject(BB_MostDangerousTarget, nullptr);
+			ClearFocus(EAIFocusPriority::Gameplay);
 			Blackboard->SetValueAsFloat(BB_MostDangerousTargetDamage, 0); // perhaps redundant
 			if (IsValid(Actor))
 			{
@@ -131,11 +132,12 @@ void AAICharacterController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulu
 	{
 		if (Stimulus.WasSuccessfullySensed())
 		{
-			Blackboard->SetValueAsObject(BB_CurrentTarget, Actor);
+			Blackboard->SetValueAsObject(BB_CurrentVisualTarget, Actor);
 		}
 		else
 		{
-			Blackboard->SetValueAsObject(BB_CurrentTarget, nullptr);
+			Blackboard->SetValueAsObject(BB_CurrentVisualTarget, nullptr);
+			ClearFocus(EAIFocusPriority::Gameplay);
 			Blackboard->SetValueAsVector(BB_CurrentTargetLastLocation, Actor->GetActorLocation());
 		}
 	}
