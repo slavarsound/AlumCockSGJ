@@ -6,7 +6,7 @@
 #include "Actors/Equipment/Weapons/ThrowableItem.h"
 #include "Actors/Equipment/Weapons/RangeWeaponItem.h"
 #include "Actors/Projectiles/GCProjectile.h"
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
 
@@ -16,8 +16,8 @@ void UCharacterEquipmentComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	const auto Owner = GetOwner();
-	checkf(Owner->IsA<AGCBaseCharacter>(), TEXT("CharacterEquipmentComponent is supposed to work only with AGCBaseCharacter derivatives"));
-	CharacterOwner = StaticCast<AGCBaseCharacter*>(Owner); 
+	checkf(Owner->IsA<ABaseCharacter>(), TEXT("CharacterEquipmentComponent is supposed to work only with AGCBaseCharacter derivatives"));
+	CharacterOwner = StaticCast<ABaseCharacter*>(Owner); 
 }
 
 void UCharacterEquipmentComponent::CreateLoadout()
@@ -169,15 +169,18 @@ void UCharacterEquipmentComponent::EquipWeapon(EEquipmentSlot EquipmentSlot)
 void UCharacterEquipmentComponent::EquipThrowable(EThrowableType ThrowableType)
 {
 	AThrowableItem* Throwable = Throwables[(uint32)ThrowableType];
-	if (IsValid(Throwable) && ThrowableEquippedEvent.IsBound())
+	if (IsValid(Throwable))
 	{
 		int32 Count = Pouch[(uint32)Throwable->GetAmmunitionType()];
 		EquippedThrowableSlot = ThrowableType;
 		ActiveThrowable = Throwable;
 		Throwable->AttachToComponent(CharacterOwner->GetMesh(),  FAttachmentTransformRules::KeepRelativeTransform,
 			Throwable->GetCharacterUnequippedSocketName());
-		
-		ThrowableEquippedEvent.ExecuteIfBound(Throwable, Count);
+
+		if (ThrowableEquippedEvent.IsBound())
+		{
+			ThrowableEquippedEvent.ExecuteIfBound(Throwable, Count);
+		}
 	}
 }
 
@@ -527,15 +530,25 @@ void UCharacterEquipmentComponent::CompleteTogglingFireMode()
 
 #pragma region THROWING
 
-bool UCharacterEquipmentComponent::TryThrow()
+bool UCharacterEquipmentComponent::CanThrow() const
 {
-	if (!IsValid(ActiveThrowable) || bThrowing || !CharacterOwner->CanStartAction(ECharacterAction::ThrowItem))
+	if (!IsValid(ActiveThrowable))
 	{
 		return false;
 	}
 	
 	int32 CurrentThrowableCount = Pouch[(uint32)ActiveThrowable->GetAmmunitionType()];
 	if (CurrentThrowableCount <= 0)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool UCharacterEquipmentComponent::TryThrow()
+{
+	if (bThrowing || !CharacterOwner->CanStartAction(ECharacterAction::ThrowItem) || !CanThrow())
 	{
 		return false;
 	}

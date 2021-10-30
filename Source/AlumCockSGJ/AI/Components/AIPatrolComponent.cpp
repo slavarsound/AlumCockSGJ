@@ -57,3 +57,23 @@ bool UAIPatrolComponent::CanPatrol() const
 {
 	return IsValid(PatrolSettings.PatrolPath) && PatrolSettings.PatrolPath->GetWaypoints().Num() > 0;
 }
+
+FVector UAIPatrolComponent::GetFocusPoint() const
+{
+	if (IsValid(PatrolSettings.PatrolPath))
+	{
+		return PatrolSettings.PatrolPath->GetFocusPoint();
+	}
+
+	return FVector::ZeroVector;
+}
+
+AActor* UAIPatrolComponent::GetFocusActor() const
+{
+	if (IsValid(PatrolSettings.PatrolPath))
+	{
+		return PatrolSettings.PatrolPath->GetFocusActor();
+	}
+
+	return nullptr;
+}

@@ -3,7 +3,7 @@
 
 #include "GCGameInstance.h"
 
-#include "GCDebugSubsystem.h"
+#include "DebugSubsystem.h"
 
 bool UGCGameInstance::ProcessConsoleExec(const TCHAR* Cmd, FOutputDevice& Ar, UObject* Executor)
 {

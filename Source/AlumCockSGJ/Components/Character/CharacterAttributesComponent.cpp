@@ -6,7 +6,7 @@
 #include "AIController.h"
 #include "CharacterEquipmentComponent.h"
 #include "DrawDebugHelpers.h"
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 #include "Kismet/GameplayStatics.h"
 
 UCharacterAttributesComponent::UCharacterAttributesComponent()
@@ -18,8 +18,8 @@ void UCharacterAttributesComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	AActor* Owner = GetOwner();
-	checkf(Owner->IsA<AGCBaseCharacter>(), TEXT("UCharacterAttributesComponent is designed only for AGCBaseCharacter"));
-	CharacterOwner = StaticCast<AGCBaseCharacter*>(Owner);
+	checkf(Owner->IsA<ABaseCharacter>(), TEXT("UCharacterAttributesComponent is designed only for AGCBaseCharacter"));
+	CharacterOwner = StaticCast<ABaseCharacter*>(Owner);
 	Health = MaxHealth;
 	Oxygen = MaxOxygen;
 	Stamina = MaxStamina;

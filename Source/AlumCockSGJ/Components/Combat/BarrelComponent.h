@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCDebugSubsystem.h"
+#include "DebugSubsystem.h"
 #include "Components/SceneComponent.h"
 #include "Data/DecalSettings.h"
 #include "BarrelComponent.generated.h"
@@ -77,7 +77,7 @@ private:
 	int32 Ammo = 0;
 	
 	#if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
-	const UGCDebugSubsystem* GetDebugSubsystem() const;
-	mutable UGCDebugSubsystem* DebugSubsystem;
+	const UDebugSubsystem* GetDebugSubsystem() const;
+	mutable UDebugSubsystem* DebugSubsystem;
 	#endif
 };

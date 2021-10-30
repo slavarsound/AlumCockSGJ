@@ -5,7 +5,7 @@
 
 #include "Camera/CameraComponent.h"
 #include "Actors/Interactive/Environment/Ladder.h"
-#include "Components/Movement/GCBaseCharacterMovementComponent.h"
+#include "Components/Movement/BaseCharacterMovementComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 

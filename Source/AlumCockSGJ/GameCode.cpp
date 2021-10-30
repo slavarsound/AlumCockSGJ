@@ -5,4 +5,4 @@
 
 // IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, GameCode, "GameCode" );
 
-// DEFINE_LOG_CATEGORY(LogCameras)
+DEFINE_LOG_CATEGORY(LogCameras)

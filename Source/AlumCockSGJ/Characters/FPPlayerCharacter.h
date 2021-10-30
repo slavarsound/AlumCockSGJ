@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PlayerCharacter.h"
-#include "Controllers/GCPlayerController.h"
+#include "Controllers/BasePlayerController.h"
 #include "FPPlayerCharacter.generated.h"
 
 const FName SocketFPCamera = FName("CameraSocket");
@@ -65,7 +65,7 @@ protected:
 private:
 	FOnMontageEnded OnMontageEnded;
 	void OnMontageEndedCallback(UAnimMontage* AnimMontage, bool bInterrupted);
-	TWeakObjectPtr<AGCPlayerController> GCPlayerController; 
+	TWeakObjectPtr<ABasePlayerController> GCPlayerController; 
 	bool IsFPMontagePlaying() const;
 	void RestrictCameraMovement(float PitchMin, float PitchMax, float YawMin, float YawMax, float YawAdjustment = 0.f);
 };

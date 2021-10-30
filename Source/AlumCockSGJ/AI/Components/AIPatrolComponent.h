@@ -16,7 +16,10 @@ public:
 	FVector SelectClosestWaypoint();
 	FVector SelectNextWaypoint();
 	bool CanPatrol() const;
-	
+	bool IsAggressive() const { return CanPatrol() && PatrolSettings.PatrolMode == EPatrolMode::Aggressive; }
+	FVector GetFocusPoint() const;
+	AActor* GetFocusActor() const;
+
 protected:
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)

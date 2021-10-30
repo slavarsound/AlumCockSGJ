@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCBaseCharacterAnimInstance.h"
+#include "BaseCharacterAnimInstance.h"
 #include "FPPlayerAnimInstance.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ALUMCOCKSGJ_API UFPPlayerAnimInstance : public UGCBaseCharacterAnimInstance
+class ALUMCOCKSGJ_API UFPPlayerAnimInstance : public UBaseCharacterAnimInstance
 {
 	GENERATED_BODY()
 
@@ -27,6 +27,6 @@ protected:
 	
 private:
 	TWeakObjectPtr<class AFPPlayerCharacter> FPPlayer;
-	TWeakObjectPtr<class AGCPlayerController> GCPlayerController;
+	TWeakObjectPtr<class ABasePlayerController> GCPlayerController;
 	float GetCameraPitchAngle() const;
 };

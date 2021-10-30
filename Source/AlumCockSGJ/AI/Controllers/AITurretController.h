@@ -4,11 +4,11 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "Perception/AIPerceptionTypes.h"
-#include "GCAIController.h"
+#include "AIBaseController.h"
 #include "AITurretController.generated.h"
 
 UCLASS()
-class ALUMCOCKSGJ_API AAITurretController : public AGCAIController
+class ALUMCOCKSGJ_API AAITurretController : public AAIBaseController
 {
 	GENERATED_BODY()
 

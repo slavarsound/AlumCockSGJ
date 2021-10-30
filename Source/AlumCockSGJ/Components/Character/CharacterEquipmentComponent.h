@@ -104,16 +104,18 @@ public:
 	void ActivateThrowableItem() const;
 	void ReleaseThrowableItem();
 
+	bool CanThrow() const;
+
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Loadout")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Loadout")
 	TMap<EAmmunitionType, int32> AmmunitionLimits;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Loadout")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Loadout")
 	TMap<EEquipmentSlot, TSubclassOf<AEquippableItem>> InitialLoadoutTypes;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Loadout")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Loadout")
 	TMap<EThrowableType, TSubclassOf<AThrowableItem>> InitialThrowables;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Loadout")
@@ -123,7 +125,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Loadout")
 	float EquipDurationMultiplier = 1.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Reload")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Reload")
 	bool bAutoReload = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Reload")
@@ -156,7 +158,7 @@ private:
 	EEquipmentSlot PreviousEquippedSlot = EEquipmentSlot::None;
 	EThrowableType EquippedThrowableSlot = EThrowableType::None;
 	
-	TWeakObjectPtr<class AGCBaseCharacter> CharacterOwner;
+	TWeakObjectPtr<class ABaseCharacter> CharacterOwner;
 
 	void CompleteReloading();
 	void CompleteChangingWeapon();

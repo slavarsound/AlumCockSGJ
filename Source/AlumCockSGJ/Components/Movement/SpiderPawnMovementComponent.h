@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "GCBasePawnMovementComponent.h"
+#include "BasePawnMovementComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "SpiderPawnMovementComponent.generated.h"
 
@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class ALUMCOCKSGJ_API USpiderPawnMovementComponent : public UGCBasePawnMovementComponent
+class ALUMCOCKSGJ_API USpiderPawnMovementComponent : public UBasePawnMovementComponent
 {
 	GENERATED_BODY()
 	

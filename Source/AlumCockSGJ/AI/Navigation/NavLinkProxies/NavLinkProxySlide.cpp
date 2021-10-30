@@ -1,7 +1,7 @@
 ﻿#include "NavLinkProxySlide.h"
 
 #include "NavLinkCustomComponent.h"
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 
 ANavLinkProxySlide::ANavLinkProxySlide()
 {
@@ -16,7 +16,7 @@ void ANavLinkProxySlide::BeginPlay()
 
 void ANavLinkProxySlide::InvokeSlide(AActor* Actor, const FVector& DestinationPoint)
 {
-	AGCBaseCharacter* Character = Cast<AGCBaseCharacter>(Actor);
+	ABaseCharacter* Character = Cast<ABaseCharacter>(Actor);
 	if (IsValid(Character))
 	{
 		Character->TryStartSliding();

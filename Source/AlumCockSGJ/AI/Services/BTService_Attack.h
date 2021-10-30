@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTService.h"
+#include "Characters/BaseCharacter.h"
 #include "BTService_Attack.generated.h"
 
 UCLASS()
@@ -14,10 +15,16 @@ public:
 
 protected:
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
-
+	virtual void OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FBlackboardKeySelector TargetKey;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float MaxAttackRange = 1000.f;
+
+private:
+	TWeakObjectPtr<class UBlackboardComponent> Blackboard;
+	TWeakObjectPtr<class AAIController> AIController;
+	TWeakObjectPtr<class ABaseCharacter> BotCharacter;
 };

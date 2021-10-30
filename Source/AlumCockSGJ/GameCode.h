@@ -1,3 +1,5 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -31,4 +33,6 @@ const FName FXParamTraceEnd = FName("TraceEnd");
 
 const FName BB_CurrentTarget = FName("CurrentTarget");
 const FName BB_NextLocation = FName("NextLocation");
-
+const FName BB_IsPatrolling = FName("IsPatrolling");
+const FName BB_FocusPoint = FName("FocusPoint");
+const FName BB_FocusActor = FName("FocusActor");

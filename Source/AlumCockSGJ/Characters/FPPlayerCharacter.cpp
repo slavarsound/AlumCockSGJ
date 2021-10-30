@@ -4,7 +4,7 @@
 #include "FPPlayerCharacter.h"
 
 #include "Camera/CameraComponent.h"
-#include "Controllers/GCPlayerController.h"
+#include "Controllers/BasePlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -74,7 +74,7 @@ void AFPPlayerCharacter::OnEndCrouchOrProne(float HalfHeightAdjust)
 void AFPPlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
-	GCPlayerController = Cast<AGCPlayerController>(NewController);
+	GCPlayerController = Cast<ABasePlayerController>(NewController);
 }
 
 bool AFPPlayerCharacter::IsFPMontagePlaying() const

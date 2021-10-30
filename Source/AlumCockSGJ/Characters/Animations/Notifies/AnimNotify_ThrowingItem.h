@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Characters/Animations/Notifies/GCAnimNotify.h"
+#include "Characters/Animations/Notifies/BaseAnimNotify.h"
 #include "AnimNotify_ThrowingItem.generated.h"
 
 UENUM(BlueprintType)
@@ -16,7 +16,7 @@ enum class EThrowNotifyType : uint8
 };
 
 UCLASS()
-class ALUMCOCKSGJ_API UAnimNotify_ThrowingItem : public UGCAnimNotify
+class ALUMCOCKSGJ_API UAnimNotify_ThrowingItem : public UBaseAnimNotify
 {
 	GENERATED_BODY()
 

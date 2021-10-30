@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCBasePawnAnimInstance.h"
+#include "BasePawnAnimInstance.h"
 
 #include "SpiderPawnAnimInstance.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class ALUMCOCKSGJ_API USpiderPawnAnimInstance : public UGCBasePawnAnimInstance
+class ALUMCOCKSGJ_API USpiderPawnAnimInstance : public UBasePawnAnimInstance
 {
 	GENERATED_BODY()
 

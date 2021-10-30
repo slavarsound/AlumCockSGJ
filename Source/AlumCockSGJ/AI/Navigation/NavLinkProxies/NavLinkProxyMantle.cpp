@@ -1,7 +1,7 @@
 #include "AI/Navigation/NavLinkProxies/NavLinkProxyMantle.h"
 
 #include "NavLinkCustomComponent.h"
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 
 
 ANavLinkProxyMantle::ANavLinkProxyMantle()
@@ -17,7 +17,7 @@ void ANavLinkProxyMantle::BeginPlay()
 
 void ANavLinkProxyMantle::InvokeMantle(AActor* Actor, const FVector& DestinationPoint)
 {
-	AGCBaseCharacter* Character = Cast<AGCBaseCharacter>(Actor);
+	ABaseCharacter* Character = Cast<ABaseCharacter>(Actor);
 	if (IsValid(Character))
 	{
 		Character->Mantle();

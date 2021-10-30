@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCAnimNotify.h"
+#include "BaseAnimNotify.h"
 #include "Animation/AnimNotifies/AnimNotify.h"
 #include "AnimNotify_ReloadShellInserted.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class ALUMCOCKSGJ_API UAnimNotify_ReloadShellInserted : public UGCAnimNotify
+class ALUMCOCKSGJ_API UAnimNotify_ReloadShellInserted : public UBaseAnimNotify
 {
 	GENERATED_BODY()
 

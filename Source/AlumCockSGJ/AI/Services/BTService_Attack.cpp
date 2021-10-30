@@ -3,24 +3,32 @@
 #include "AIController.h"
 #include "Actors/Equipment/Weapons/RangeWeaponItem.h"
 #include "BehaviorTree/BlackboardComponent.h"
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 #include "Components/Character/CharacterEquipmentComponent.h"
 
 
 UBTService_Attack::UBTService_Attack()
 {
 	NodeName = "Attack";
+	bNotifyBecomeRelevant = 1;
+}
+
+
+void UBTService_Attack::OnBecomeRelevant(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	AIController = OwnerComp.GetAIOwner();
+	if (!AIController.IsValid())
+		return;
+	
+	Blackboard = OwnerComp.GetBlackboardComponent();
+	BotCharacter = Cast<ABaseCharacter>(AIController->GetPawn());
 }
 
 void UBTService_Attack::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
-	AAIController* Controller = OwnerComp.GetAIOwner();
-	UBlackboardComponent* Blackboard = OwnerComp.GetBlackboardComponent();
-	if (!IsValid(Controller) || !IsValid(Blackboard)) return;
-
-	AGCBaseCharacter* BotCharacter = Cast<AGCBaseCharacter>(Controller->GetPawn());
-	if (!IsValid(BotCharacter)) return;
+	
+	if (!Blackboard.IsValid() || !AIController.IsValid() || !BotCharacter.IsValid()) return;
 
 	const UCharacterEquipmentComponent* EquipmentComponent = BotCharacter->GetEquipmentComponent();
 	const ARangeWeaponItem* RangeWeapon = EquipmentComponent->GetCurrentRangeWeapon();

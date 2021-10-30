@@ -1,6 +1,6 @@
 #include "AITurretController.h"
 #include "AI/Characters/Turret.h"
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 #include "Components/Character/CharacterAttributesComponent.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISense_Damage.h"
@@ -72,7 +72,7 @@ void AAITurretController::Think()
 	TArray<AActor*> SightPerceptedActorsCopy = CurrentlySightPerceptedActors;
 	for (AActor* PerceivedActor : SightPerceptedActorsCopy)
 	{
-		AGCBaseCharacter* PerceivedCharacter = Cast<AGCBaseCharacter>(PerceivedActor);
+		ABaseCharacter* PerceivedCharacter = Cast<ABaseCharacter>(PerceivedActor);
 		if (IsValid(PerceivedCharacter))
 		{
 			if (!PerceivedCharacter->GetCharacterAttributesComponent()->IsAlive())

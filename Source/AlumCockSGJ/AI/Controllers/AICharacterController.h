@@ -1,11 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCAIController.h"
+#include "AIBaseController.h"
 #include "AICharacterController.generated.h"
 
 UCLASS()
-class ALUMCOCKSGJ_API AAICharacterController : public AGCAIController
+class ALUMCOCKSGJ_API AAICharacterController : public AAIBaseController
 {
 	GENERATED_BODY()
 
@@ -33,9 +33,8 @@ private:
 	void TryPatrol();
 	void TryMoveToNextTarget();
 	bool IsTargetReached(FVector TargetLocation, float TargetReachRadius) const;
-	void OnFollowCooldownElapsed();
 	
-	TWeakObjectPtr<class AGCAICharacter> ControlledCharacter;
+	TWeakObjectPtr<class AAICharacter> ControlledCharacter;
 	TWeakObjectPtr<AActor> LastFollowedActor;
 	FTimerHandle ActorFollowCooldownTimer;
 

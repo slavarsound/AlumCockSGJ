@@ -12,6 +12,17 @@ enum class ETeam : uint8
 	Dead
 };
 
+UENUM(BlueprintType)
+enum class EAIState : uint8
+{
+	Patrolling,
+	Investigating,
+	Pursuing,
+	Attacking,
+	Retreating,
+	Covering
+};
+
 inline ETeamAttitude::Type GCTeamAttitudeSolver(FGenericTeamId A, FGenericTeamId B)
 {
 	if (A.GetId() ==(uint8)ETeam::Dead || B.GetId() == (uint8)ETeam::Dead)

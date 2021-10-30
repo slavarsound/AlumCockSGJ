@@ -2,7 +2,7 @@
 
 #include "DrawDebugHelpers.h"
 #include "GameCode.h"
-#include "GCDebugSubsystem.h"
+#include "DebugSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
@@ -148,11 +148,11 @@ void UBarrelComponent::FinalizeShot() const
 
 #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
 
-const UGCDebugSubsystem* UBarrelComponent::GetDebugSubsystem() const
+const UDebugSubsystem* UBarrelComponent::GetDebugSubsystem() const
 {
 	if (!IsValid(DebugSubsystem))
 	{
-		DebugSubsystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UGCDebugSubsystem>();
+		DebugSubsystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UDebugSubsystem>();
 	}
 
 	return DebugSubsystem;

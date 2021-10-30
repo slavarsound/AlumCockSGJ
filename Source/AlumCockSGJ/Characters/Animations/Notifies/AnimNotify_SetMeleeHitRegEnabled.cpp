@@ -3,7 +3,7 @@
 
 #include "Characters/Animations/Notifies/AnimNotify_SetMeleeHitRegEnabled.h"
 
-#include "Characters/GCBaseCharacter.h"
+#include "Characters/BaseCharacter.h"
 #include "Components/Character/CharacterEquipmentComponent.h"
 
 void UAnimNotify_SetMeleeHitRegEnabled::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)

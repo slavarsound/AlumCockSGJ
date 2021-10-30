@@ -1,10 +1,10 @@
 #include "MeleeHitRegistratorComponent.h"
 
 #include "GameCode.h"
-#include "GCDebugSubsystem.h"
+#include "DebugSubsystem.h"
 #include "DrawDebugHelpers.h"
 #include "Utils/DebugUtils.h"
-#include "Utils/GCTraceUtils.h"
+#include "Utils/TraceUtils.h"
 
 UMeleeHitRegistratorComponent::UMeleeHitRegistratorComponent()
 {
@@ -43,10 +43,10 @@ void UMeleeHitRegistratorComponent::ProcessHitRegistration()
 		Owner = Owner->GetOwner();
 	}
 
-	GCTraceUtils::FTraceParams TraceParams(bDrawDebugEnabled);
+	TraceUtils::FTraceParams TraceParams(bDrawDebugEnabled);
 	FHitResult Hit;
 	// TODO SweepSphereMultiByChannel?
-	bool bHit = GCTraceUtils::SweepSphereSingleByChannel(GetWorld(), Hit, PreviousLocation, CurrentLocation, GetScaledSphereRadius(),
+	bool bHit = TraceUtils::SweepSphereSingleByChannel(GetWorld(), Hit, PreviousLocation, CurrentLocation, GetScaledSphereRadius(),
 		ECC_MeleeHitRegistrator, QueryParams, TraceParams);
 
 	if (bHit)

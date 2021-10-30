@@ -6,9 +6,9 @@
 #include "DrawDebugHelpers.h"
 #include "Components/CapsuleComponent.h"
 #include "GameCode.h"
-#include "GCDebugSubsystem.h"
+#include "DebugSubsystem.h"
 #include "GCGameInstance.h"
-#include "Utils/GCTraceUtils.h"
+#include "Utils/TraceUtils.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -33,7 +33,7 @@ bool ULedgeDetectionComponent::DetectLedge(FLedgeDescriptor& LedgeDescriptor)
 	bool bDebugEnabled = false;
 #endif
 
-	const GCTraceUtils::FTraceParams TraceParams(bDebugEnabled);
+	const TraceUtils::FTraceParams TraceParams(bDebugEnabled);
 
 	FCollisionQueryParams CollisionQueryParams;
 	CollisionQueryParams.bTraceComplex = true;
@@ -47,7 +47,7 @@ bool ULedgeDetectionComponent::DetectLedge(FLedgeDescriptor& LedgeDescriptor)
 	
 	FHitResult ForwardCheckHitResult;
 
-	bool bForwardHit = GCTraceUtils::SweepCapsuleSingleByChannel(GetWorld(), ForwardCheckHitResult,
+	bool bForwardHit = TraceUtils::SweepCapsuleSingleByChannel(GetWorld(), ForwardCheckHitResult,
 		ForwardSweepStartLocation, ForwardSweepEndLocation, ForwardCheckCapsuleRadius, ForwardCheckCapsuleHalfHeight,
 		ECC_Climbable, CollisionQueryParams, TraceParams);
 	if (!bForwardHit)
@@ -76,7 +76,7 @@ bool ULedgeDetectionComponent::DetectLedge(FLedgeDescriptor& LedgeDescriptor)
 	DownwardSweepStartLocation.Z = CharacterBottom.Z + MaxLedgeHeight + ForwardCheckCapsuleRadius;	
 	FVector DownwardSweepEndLocation = DownwardSweepStartLocation - FVector::UpVector * (MaxLedgeHeight - MinLedgeHeight);
 
-	bool bDownwardHit = GCTraceUtils::SweepSphereSingleByChannel(GetWorld(), DownwardCheckHitResult,
+	bool bDownwardHit = TraceUtils::SweepSphereSingleByChannel(GetWorld(), DownwardCheckHitResult,
 		DownwardSweepStartLocation, DownwardSweepEndLocation, DownwardSweepSphereRadius, ECC_Climbable,
 		CollisionQueryParams, TraceParams);
 	
@@ -90,7 +90,7 @@ bool ULedgeDetectionComponent::DetectLedge(FLedgeDescriptor& LedgeDescriptor)
 	FCollisionShape OverlapCapsuleShape = FCollisionShape::MakeCapsule(OverlapCapsuleRadius, OverlapCapsuleHalfHeight);
 	FVector OverlapLocation = DownwardCheckHitResult.ImpactPoint + (OverlapCapsuleHalfHeight + BottomZOffset) * FVector::UpVector;
 	
-	bool bOverlap = GCTraceUtils::OverlapCapsuleBlockingByProfile(GetWorld(), OverlapLocation, OverlapCapsuleRadius,
+	bool bOverlap = TraceUtils::OverlapCapsuleBlockingByProfile(GetWorld(), OverlapLocation, OverlapCapsuleRadius,
 		OverlapCapsuleHalfHeight, ProfilePawn, CollisionQueryParams, TraceParams);
 
 	if (bOverlap)
@@ -106,11 +106,11 @@ bool ULedgeDetectionComponent::DetectLedge(FLedgeDescriptor& LedgeDescriptor)
 	return true;
 }
 
-UGCDebugSubsystem* ULedgeDetectionComponent::GetDebugSubsystem()
+UDebugSubsystem* ULedgeDetectionComponent::GetDebugSubsystem()
 {
 	if (!IsValid(DebugSubsystem))
 	{
-		DebugSubsystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UGCDebugSubsystem>();
+		DebugSubsystem = UGameplayStatics::GetGameInstance(GetWorld())->GetSubsystem<UDebugSubsystem>();
 	}
 
 	return DebugSubsystem;

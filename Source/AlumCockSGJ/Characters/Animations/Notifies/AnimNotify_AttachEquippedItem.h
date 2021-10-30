@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCAnimNotify.h"
+#include "BaseAnimNotify.h"
 #include "AnimNotify_AttachEquippedItem.generated.h"
 
 UCLASS()
-class ALUMCOCKSGJ_API UAnimNotify_AttachEquippedItem : public UGCAnimNotify
+class ALUMCOCKSGJ_API UAnimNotify_AttachEquippedItem : public UBaseAnimNotify
 {
 	GENERATED_BODY()
 

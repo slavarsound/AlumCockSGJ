@@ -12,8 +12,20 @@ class ALUMCOCKSGJ_API APatrolPath : public AActor
 public:
 	const TArray<FVector>& GetWaypoints() const { return Waypoints; }
 	void Reverse();
-	
+	FVector GetFocusPoint() const;
+	FVector GetGuardLocation() const;
+	AActor* GetFocusActor () const { return ViewActor; }
+
 protected:
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, meta=(MakeEditWidget))
 	TArray<FVector> Waypoints;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, meta=(MakeEditWidget))
+	FVector ViewCenter;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, meta=(MakeEditWidget))
+	FVector GuardLocation;
+	
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly)
+	AActor* ViewActor;
 };

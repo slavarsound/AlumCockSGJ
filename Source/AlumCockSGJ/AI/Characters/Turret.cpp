@@ -96,6 +96,12 @@ void ATurret::Search(float DeltaTime)
 
 void ATurret::Track(float DeltaTime)
 {
+	if (!Target.IsValid())
+	{
+		SetCurrentTarget(nullptr);
+		return;
+	}
+	
 	FVector BaseLookAtDirection = (Target->GetActorLocation() - TurretBaseComponent->GetComponentLocation()).GetSafeNormal2D();
 	FQuat LookAtQuat = BaseLookAtDirection.ToOrientationQuat();
 	FQuat TargetQuat = FMath::QInterpTo(TurretBaseComponent->GetComponentQuat(), LookAtQuat, DeltaTime, LookAtInterpSpeed);

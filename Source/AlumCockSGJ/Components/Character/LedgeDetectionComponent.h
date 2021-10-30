@@ -50,7 +50,7 @@ protected:
 
 private:
 	class ACharacter* CharacterOwner;
-	class UGCDebugSubsystem* DebugSubsystem;
+	class UDebugSubsystem* DebugSubsystem;
 
-	UGCDebugSubsystem* GetDebugSubsystem();
+	UDebugSubsystem* GetDebugSubsystem();
 };

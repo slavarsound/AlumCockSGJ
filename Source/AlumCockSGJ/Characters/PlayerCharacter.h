@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCBaseCharacter.h"
+#include "BaseCharacter.h"
 #include "Components/TimelineComponent.h"
 
 #include "PlayerCharacter.generated.h"
 
 UCLASS(Blueprintable)
-class ALUMCOCKSGJ_API APlayerCharacter : public AGCBaseCharacter
+class ALUMCOCKSGJ_API APlayerCharacter : public ABaseCharacter
 {
 	GENERATED_BODY()
 

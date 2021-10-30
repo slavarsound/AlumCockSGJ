@@ -9,6 +9,13 @@ enum class EPatrolType : uint8
 	PingPong
 };
 
+UENUM(BlueprintType)
+enum class EPatrolMode : uint8
+{
+	Defensive = 0,
+	Aggressive = 1
+};
+
 USTRUCT(BlueprintType)
 struct FPatrolSettings
 {
@@ -19,4 +26,7 @@ struct FPatrolSettings
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	EPatrolType PatrolType = EPatrolType::Circle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EPatrolMode PatrolMode = EPatrolMode::Defensive;
 };

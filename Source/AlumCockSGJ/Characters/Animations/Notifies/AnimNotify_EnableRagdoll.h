@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCAnimNotify.h"
+#include "BaseAnimNotify.h"
 #include "AnimNotify_EnableRagdoll.generated.h"
 
 UCLASS()
-class ALUMCOCKSGJ_API UAnimNotify_EnableRagdoll : public UGCAnimNotify
+class ALUMCOCKSGJ_API UAnimNotify_EnableRagdoll : public UBaseAnimNotify
 {
 	GENERATED_BODY()
 

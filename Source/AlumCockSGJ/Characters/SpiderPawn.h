@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GCBasePawn.h"
+#include "BasePawn.h"
 #include "SpiderPawn.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ALUMCOCKSGJ_API ASpiderPawn : public AGCBasePawn
+class ALUMCOCKSGJ_API ASpiderPawn : public ABasePawn
 {
 	GENERATED_BODY()
 

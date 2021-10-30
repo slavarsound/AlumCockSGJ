@@ -93,7 +93,7 @@ private:
 	FTimerHandle DrowningTimer;
 	void DrowningCallback();
 
-	TWeakObjectPtr<class AGCBaseCharacter> CharacterOwner;
+	TWeakObjectPtr<class ABaseCharacter> CharacterOwner;
 	float Stamina = 0.f;
 	
 	bool bWallrunning;

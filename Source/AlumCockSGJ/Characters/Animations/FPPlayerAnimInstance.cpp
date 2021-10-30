@@ -11,7 +11,7 @@ void UFPPlayerAnimInstance::NativeBeginPlay()
 	const auto Pawn = TryGetPawnOwner();
 	checkf(Pawn->IsA<AFPPlayerCharacter>(), TEXT("UFPPlayerAnimInstance is only for AFPPlayerCharacter"));
 	FPPlayer = StaticCast<AFPPlayerCharacter*>(Pawn);
-	GCPlayerController = FPPlayer->GetController<AGCPlayerController>();
+	GCPlayerController = FPPlayer->GetController<ABasePlayerController>();
 }
 
 void UFPPlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
