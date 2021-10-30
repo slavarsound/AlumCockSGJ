@@ -76,3 +76,9 @@ DerivedDataCache/*
 .idea/.idea.AlumCockSGJ/.idea/indexLayout.xml
 .idea/.idea.AlumCockSGJ/.idea/projectSettingsUpdater.xml
 .idea/.idea.AlumCockSGJ/.idea/vcs.xml
+
+
+!/Binaries/Win64/AlumCockSGJEditor.target
+!/Binaries/Win64/UE4Editor.modules
+!/Binaries/Win64/UE4Editor-AlumCockSGJ.dll
+!/Binaries/Win64/UE4Editor-AlumCockSGJ.pdb
