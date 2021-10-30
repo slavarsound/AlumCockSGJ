@@ -12,6 +12,7 @@
 void AAICharacterController::BeginPlay()
 {
 	Super::BeginPlay();
+	PerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &AAICharacterController::OnTargetPerceptionUpdated);
 }
 
 void AAICharacterController::SetPawn(APawn* InPawn)

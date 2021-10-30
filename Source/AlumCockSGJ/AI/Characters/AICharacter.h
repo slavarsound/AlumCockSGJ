@@ -19,6 +19,9 @@ public:
 	UAIPatrolComponent* GetAIPatrolComponent() const { return AIPatrolComponent; }
 	UBehaviorTree* GetBehaviorTree() const { return DefaultBehaviorTree; }
 
+	virtual void PossessedBy(AController* NewController) override;
+	ETeam GetTeam() const { return Team; }
+	
 	class UAICharacterMovementComponent* GetAIMovementComponent() const { return AIMovementComponent.Get(); }
 	
 protected:
@@ -27,7 +30,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UBehaviorTree* DefaultBehaviorTree;
-
+	
 	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	// class UNavigationInvokerComponent* NavigationInvokerComponent;
 

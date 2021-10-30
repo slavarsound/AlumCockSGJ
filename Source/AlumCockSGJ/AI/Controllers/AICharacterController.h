@@ -34,6 +34,8 @@ private:
 	void TryPatrol();
 	void TryMoveToNextTarget();
 	bool IsTargetReached(FVector TargetLocation, float TargetReachRadius) const;
+
+	UFUNCTION()
 	void OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 	
 	TWeakObjectPtr<class AAICharacter> ControlledCharacter;

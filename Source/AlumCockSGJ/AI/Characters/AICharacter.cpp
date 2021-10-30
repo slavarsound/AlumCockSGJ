@@ -17,8 +17,20 @@ AAICharacter::AAICharacter(const FObjectInitializer& ObjectInitializer)
 	// AddOwnedComponent(NavigationInvokerComponent);
 }
 
+void AAICharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	IGenericTeamAgentInterface* AIController = Cast<IGenericTeamAgentInterface>(NewController);
+	if (!AIController)
+	{
+		return;
+	}
+
+	AIController->SetGenericTeamId(FGenericTeamId((uint8)Team));
+}
+
 void AAICharacter::ReactToDamage(AActor* DamagedActor, float Damage, const UDamageType* Damage1,
-	AController* InstigatedBy, AActor* DamageCauser)
+                                 AController* InstigatedBy, AActor* DamageCauser)
 {
 	Super::ReactToDamage(DamagedActor, Damage, Damage1, InstigatedBy, DamageCauser);
 	if (!CharacterAttributesComponent->IsAlive())

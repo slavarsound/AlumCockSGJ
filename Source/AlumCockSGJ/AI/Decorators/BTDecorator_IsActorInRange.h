@@ -11,6 +11,7 @@ class ALUMCOCKSGJ_API UBTDecorator_IsActorInRange : public UBTDecorator
 
 public:
 	
+	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FBlackboardKeySelector ActorKey;
