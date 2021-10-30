@@ -8,6 +8,17 @@ public class AlumCockSGJ : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Niagara", "UMG", 
+			"NavigationSystem",
+			"GameplayTasks",
+			"OnlineSubsystem",
+			"OnlineSubsystemUtils"
+		});
+
+		DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+
+		PrivateDependencyModuleNames.AddRange(new string[] {  });
+
+		PrivateIncludePaths.AddRange(new []{ Name });
 	}
 }
