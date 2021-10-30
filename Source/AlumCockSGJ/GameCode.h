@@ -32,7 +32,14 @@ const FName SocketForegrip = FName("foregrip_socket");
 const FName FXParamTraceEnd = FName("TraceEnd");
 
 const FName BB_CurrentTarget = FName("CurrentTarget");
+const FName BB_CurrentTargetLastLocation = FName("CurrentTargetLastLocation");
+
 const FName BB_NextLocation = FName("NextLocation");
 const FName BB_IsPatrolling = FName("IsPatrolling");
 const FName BB_FocusPoint = FName("FocusPoint");
 const FName BB_FocusActor = FName("FocusActor");
+
+const FName BB_InterestingLocation = FName("InterestingLocation");
+
+const FName BB_MostDangerousTarget = FName("MostDangerousTarget");
+const FName BB_MostDangerousTargetDamage = FName("MostDangerousTargetDamage");
