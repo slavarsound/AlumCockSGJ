@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "AIBaseController.h"
+#include "Perception/AIPerceptionTypes.h"
 #include "AICharacterController.generated.h"
 
 UCLASS()
@@ -28,11 +29,12 @@ protected:
 	// in seconds
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float ActorFollowCooldown = 0.1f;
-	
+
 private:
 	void TryPatrol();
 	void TryMoveToNextTarget();
 	bool IsTargetReached(FVector TargetLocation, float TargetReachRadius) const;
+	void OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 	
 	TWeakObjectPtr<class AAICharacter> ControlledCharacter;
 	TWeakObjectPtr<AActor> LastFollowedActor;

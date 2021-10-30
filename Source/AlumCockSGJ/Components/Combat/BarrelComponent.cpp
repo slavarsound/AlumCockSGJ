@@ -8,6 +8,7 @@
 #include "NiagaraComponent.h"
 #include "Actors/Projectiles/GCProjectile.h"
 #include "Components/DecalComponent.h"
+#include "Perception/AISense_Hearing.h"
 #include "Sound/SoundCue.h"
 
 void UBarrelComponent::Shoot(const FVector& ViewLocation, const FVector& Direction, AController* ShooterController)
@@ -144,6 +145,9 @@ void UBarrelComponent::FinalizeShot() const
 	{
 		UGameplayStatics::SpawnSoundAttached(ShotSound, GetAttachmentRoot());
 	}
+
+	// TODO tweak params
+	UAISense_Hearing::ReportNoiseEvent(GetWorld(), GetComponentLocation());
 }
 
 #if UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG

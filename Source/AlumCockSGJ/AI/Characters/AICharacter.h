@@ -31,6 +31,9 @@ protected:
 	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	// class UNavigationInvokerComponent* NavigationInvokerComponent;
 
+	virtual void ReactToDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy,
+		AActor* DamageCauser) override;
+	
 private:
 	TWeakObjectPtr<UAICharacterMovementComponent> AIMovementComponent;
 
