@@ -248,7 +248,7 @@ protected:
 	float PlayAnimMontageWithDuration(UAnimMontage* Montage, float DesiredDuration);
 
 	UFUNCTION()
-	void ReactToDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
+	virtual void ReactToDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
 		AController* InstigatedBy, AActor* DamageCauser);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
