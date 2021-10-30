@@ -31,7 +31,7 @@ const FName SocketForegrip = FName("foregrip_socket");
 
 const FName FXParamTraceEnd = FName("TraceEnd");
 
-const FName BB_CurrentTarget = FName("CurrentTarget");
+const FName BB_CurrentVisualTarget = FName("CurrentVisualTarget");
 const FName BB_CurrentTargetLastLocation = FName("CurrentTargetLastLocation");
 
 const FName BB_NextLocation = FName("NextLocation");
